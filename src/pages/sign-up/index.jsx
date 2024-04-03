@@ -43,7 +43,6 @@ const SignUp = () => {
       alert("Please fill all fields correctly.");
       return;
     }
-
     try {
       const response = await fetch("http://localhost:3001/api/auth/signup", {
         method: "POST",
@@ -56,11 +55,8 @@ const SignUp = () => {
           password,
         }),
       });
-
+      console.log("object");
       const data = await response.json();
-      console.log("Opening OTP modal...");
-      setOpen(true);
-
       if (!response.ok) {
         throw new Error(data.message || "Something went wrong");
       }
@@ -72,6 +68,7 @@ const SignUp = () => {
       // setOpen(true);
     } catch (error) {
       alert(error.message);
+      return;
     }
   };
 
@@ -97,7 +94,7 @@ const SignUp = () => {
         throw new Error(data.message || "OTP verification failed");
       }
       alert("OTP verified successfully!");
-      navigate("/");
+      navigate("/login");
     } catch (error) {
       alert(error.message);
     }
@@ -200,6 +197,7 @@ const SignUp = () => {
               </p>
             </div>
             <Button title="Create Account" onClick={handleSubmit} />
+            <button onClick={() => setOpen(true)}>Test Open Modal</button>
 
             <div className="social-login-line">
               <div />
@@ -224,84 +222,47 @@ const SignUp = () => {
         </div>
       </div>
       {/* Modal was here */}
-
-      {open && (
-        <BootstrapDialog
-          onClose={() => setOpen(false)}
-          aria-labelledby="customized-dialog-title"
-          open={open}
-        >
-          <DialogContent dividers>
-            <Typography gutterBottom>
-              <div className="otp-modal-header">
-                <h2>Verify Your Email</h2>
-                <button onClick={() => setOpen(false)} className="close-button">
-                  <IoMdClose size={24} />
-                </button>
-              </div>
-            </Typography>
-            <Typography gutterBottom>
-              <div className="otp-instructions">
-                Please enter the 6-digit verification code we sent to your
-                email:
-                <span className="email-highlight"> {email}</span>
-              </div>
-            </Typography>
-            <Typography gutterBottom component="div">
-              <OtpInput
-                value={otp}
-                onChange={setOtp}
-                numInputs={6}
-                separator={<span>-</span>}
-                inputStyle="otp-input-style"
-                shouldAutoFocus
-              />
-              <div className="otp-timer">
-                Time remaining: {formatTime(seconds)}
-              </div>
-            </Typography>
-            <div className="otp-verify-button-container">
-              <Button onClick={verifyOtp}>Verify</Button>
+      <BootstrapDialog
+        onClose={() => setOpen(false)}
+        aria-labelledby="customized-dialog-title"
+        open={open}
+      >
+        <DialogContent dividers>
+          <Typography gutterBottom>
+            <div className="otp-modal-header">
+              <h2>Verify Your Email</h2>
+              <button onClick={() => setOpen(false)} className="close-button">
+                <IoMdClose size={24} />
+              </button>
             </div>
-          </DialogContent>
-        </BootstrapDialog>
-      )}
-      {/* <BootstrapDialog
-  onClose={() => setOpen(false)}
-  aria-labelledby="customized-dialog-title"
-  open={open}
->
-  <DialogContent dividers>
-    <Typography gutterBottom>
-      <div className="otp-modal-header">
-        <h2>Verify Your Email</h2>
-        <button onClick={() => setOpen(false)} className="close-button">
-          <IoMdClose size={24} />
-        </button>
-      </div>
-    </Typography>
-    <Typography gutterBottom>
-      <div className="otp-instructions">
-        Please enter the 6-digit verification code we sent to your email:
-        <span className="email-highlight"> {email}</span>
-      </div>
-    </Typography>
-    <Typography gutterBottom component="div">
-      <OtpInput
-        value={otp}
-        onChange={setOtp}
-        numInputs={6}
-        separator={<span>-</span>}
-        inputStyle="otp-input-style"
-        shouldAutoFocus
-      />
-      <div className="otp-timer">Time remaining: {formatTime(seconds)}</div>
-    </Typography>
-    <div className="otp-verify-button-container">
-      <Button onClick={verifyOtp}>Verify</Button>
-    </div>
-  </DialogContent>
-</BootstrapDialog> */}
+          </Typography>
+          <Typography gutterBottom>
+            <div className="otp-instructions">
+              Please enter the 6-digit verification code we sent to your email:
+              <span className="email-highlight"> {email}</span>
+            </div>
+          </Typography>
+          <Typography gutterBottom component="div">
+            <OtpInput
+              value={otp}
+              onChange={setOtp}
+              numInputs={6}
+              renderInput={(props, index) => (
+                <input {...props} key={index} placeholder="0" />
+              )}
+              separator={<span>-</span>}
+              inputStyle="otp-input-style"
+              shouldAutoFocus
+            />
+            <div className="otp-timer">
+              Time remaining: {formatTime(seconds)}
+            </div>
+          </Typography>
+          <div className="otp-verify-button-container">
+            <Button onClick={verifyOtp}>Verify</Button>
+          </div>
+        </DialogContent>
+      </BootstrapDialog>
     </div>
   );
 };

@@ -34,8 +34,11 @@ const Navbar = ({ margin }) => {
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    navigate("/");
+    setLoggedIn(false);
+    setInitials("");
     setDialogOpen(false);
+    navigate("/");
+
   };
 
   return (
@@ -64,7 +67,7 @@ const Navbar = ({ margin }) => {
           <Grid item xs={6} sm={6} md={6} lg={6} xl={6}>
             {loggedIn ? (
               <div className="navbar-right-section">
-                <Avatar onClick={() => setDialogOpen(true)}>{initials}</Avatar>
+                <Avatar onClick={() => setDialogOpen(true)} style={{textTransform:'capitalize'}}>{initials}</Avatar>
                 <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)}>
                   <DialogActions>
                     <MuiButton onClick={handleLogout}>Logout</MuiButton>

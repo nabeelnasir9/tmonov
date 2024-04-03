@@ -28,21 +28,24 @@ const Footer = () => {
                 <a
                   href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp"
                   target="_blank"
+                  rel="noreferrer"
                 >
-                  <img src={Twitter} />
+                  <img src={Twitter} alt="twitter" />
                 </a>
                 <a
                   href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp"
                   target="_blank"
+                  rel="noreferrer"
                 >
-                  <img src={instagram} />
+                  <img src={instagram} alt="Instagram" />
                 </a>
                 <a
                   href="https://www.w3schools.com/css/css_rwd_mediaqueries.asp"
                   target="_blank"
                   style={{ marginRight: "0px" }}
+                  rel="noreferrer"
                 >
-                  <img src={Discard} />
+                  <img src={Discard} alt="discord" />
                 </a>
               </div>
             </Grid>

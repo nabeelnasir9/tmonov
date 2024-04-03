@@ -95,7 +95,7 @@ const TomnovGenerate = () => {
               <h4 className="tomnov-generate-left-title">Swap Images</h4>
               <label className="tomnov-generate-upload-button">
                 <input type="file" hidden />
-                <img src={GenerateIcon} />
+                <img src={GenerateIcon} alt="icon" />
                 <p>Upload Target Image</p>
               </label>
               <Button title="Generate Deck" />
@@ -108,7 +108,10 @@ const TomnovGenerate = () => {
                     <button className="tomnov-generate-button">
                       <div>Regenerate</div>
                     </button>
-                    <button className="tomnov-generate-print-button" onClick={()=> navigate("/account")}>
+                    <button
+                      className="tomnov-generate-print-button"
+                      onClick={() => navigate("/account")}
+                    >
                       Print and Order
                     </button>
                   </div>
@@ -122,11 +125,11 @@ const TomnovGenerate = () => {
                             className="tomnov-generate-image-mian"
                             onClick={() =>
                               navigate("/individual-card-review", {
-                                state: { index: i }
+                                state: { index: i },
                               })
                             }
                           >
-                            <img src={v} />
+                            <img src={v} alt="icon" />
                           </button>
                         </Grid>
                       );

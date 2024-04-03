@@ -17,7 +17,7 @@ const OrderSummary = () => {
         {List.map((v, i) => {
           return (
             <Grid item key={i} xs={3} sm={3} md={3} lg={3} xl={3}>
-              <img src={v} className="order-summary-images" />
+              <img src={v} className="order-summary-images" alt="summary" />
             </Grid>
           );
         })}
@@ -28,15 +28,17 @@ const OrderSummary = () => {
           <p className="order-summary-counter-price">$320.45</p>
         </div>
         <div className="order-summary-counter-button-main">
-          <button onClick={()=>{
-            if(counter>1){
-                setCounter(counter-1)
-            }
-          }}>
+          <button
+            onClick={() => {
+              if (counter > 1) {
+                setCounter(counter - 1);
+              }
+            }}
+          >
             <FiMinus />
           </button>
           <p>{counter}</p>
-          <button onClick={() => setCounter(counter+1)}>
+          <button onClick={() => setCounter(counter + 1)}>
             <FiPlus />
           </button>
         </div>

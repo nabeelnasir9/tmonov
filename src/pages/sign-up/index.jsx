@@ -57,7 +57,6 @@ const SignUp = () => {
         }),
       });
 
-
       const data = await response.json();
       console.log("Opening OTP modal...");
       setOpen(true);
@@ -89,7 +88,7 @@ const SignUp = () => {
             email: email,
             otp: otp,
           }),
-        }
+        },
       );
 
       const data = await response.json();
@@ -97,7 +96,6 @@ const SignUp = () => {
       if (!response.ok) {
         throw new Error(data.message || "OTP verification failed");
       }
-
       alert("OTP verified successfully!");
       navigate("/");
     } catch (error) {
@@ -129,7 +127,7 @@ const SignUp = () => {
     const seconds = time % 60;
     return `${String(minutes).padStart(2, "0")}:${String(seconds).padStart(
       2,
-      "0"
+      "0",
     )}`;
   };
   return (
@@ -137,7 +135,7 @@ const SignUp = () => {
       <div id="signup-container-inner">
         <div className="signup-section-1">
           <div className="form-contianer">
-            <img src={Logo} className="login-logo" />
+            <img src={Logo} className="login-logo" alt="logo" />
             <h1 className="login-heading">Signup</h1>
             <div className="login-header">
               <p>Already Have An Account, </p>
@@ -222,7 +220,7 @@ const SignUp = () => {
           </div>
         </div>
         <div className="signup-section-2">
-          <img src={SignUpImage} />
+          <img src={SignUpImage} alt="logo" />
         </div>
       </div>
       {/* Modal was here */}
@@ -244,7 +242,8 @@ const SignUp = () => {
             </Typography>
             <Typography gutterBottom>
               <div className="otp-instructions">
-                Please enter the 6-digit verification code we sent to your email:
+                Please enter the 6-digit verification code we sent to your
+                email:
                 <span className="email-highlight"> {email}</span>
               </div>
             </Typography>
@@ -257,7 +256,9 @@ const SignUp = () => {
                 inputStyle="otp-input-style"
                 shouldAutoFocus
               />
-              <div className="otp-timer">Time remaining: {formatTime(seconds)}</div>
+              <div className="otp-timer">
+                Time remaining: {formatTime(seconds)}
+              </div>
             </Typography>
             <div className="otp-verify-button-container">
               <Button onClick={verifyOtp}>Verify</Button>
@@ -265,7 +266,7 @@ const SignUp = () => {
           </DialogContent>
         </BootstrapDialog>
       )}
-{/* <BootstrapDialog
+      {/* <BootstrapDialog
   onClose={() => setOpen(false)}
   aria-labelledby="customized-dialog-title"
   open={open}
@@ -301,7 +302,6 @@ const SignUp = () => {
     </div>
   </DialogContent>
 </BootstrapDialog> */}
-
     </div>
   );
 };

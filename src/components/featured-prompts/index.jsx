@@ -70,7 +70,7 @@ const FeaturedPrompts = () => {
             </div>
             <button className="see-all-button">
               See All
-              <img src={RightIcon} />
+              <img src={RightIcon} alt="icon" />
             </button>
           </div>
           <Grid container spacing={2}>
@@ -79,13 +79,15 @@ const FeaturedPrompts = () => {
                 <Grid key={i} item xs={12} sm={6} md={6} lg={4} xl={3}>
                   <div className="fea-pro-card">
                     <div className="fea-pro-card-image-main">
-                      <img src={v.url} />
+                      <img src={v.url} alt="url" />
                       <div className="fea-pro-card-header">
                         <div>Tarot Card</div>
                         <button>
-                          {!v.save ?
-                          <GoHeart color="#fff"/>:
-                          <GoHeartFill color="#fff"/>}
+                          {!v.save ? (
+                            <GoHeart color="#fff" />
+                          ) : (
+                            <GoHeartFill color="#fff" />
+                          )}
                         </button>
                       </div>
                     </div>
@@ -95,6 +97,7 @@ const FeaturedPrompts = () => {
                           <img
                             src={v.profile}
                             className="fea-pro-card-profile"
+                            alt="profile"
                           />
                           <p>{v.name}</p>
                         </div>

@@ -31,14 +31,13 @@ const WhyChooseUs = () => {
           <Grid item xs={2} sm={2} md={2} lg={2} xl={2}>
             <div className="w-c-us-arrow-image-main">
               <div>
-                <img src={Arrow} className="w-c-us-arrow-image" />
+                <img src={Arrow} className="w-c-us-arrow-image" alt="arrow" />
               </div>
             </div>
           </Grid>
           <Grid item xs={1} sm={1} md={2} lg={2} xl={2}></Grid>
-          <Grid item xs={9} sm={9} md={8} lg={8} xl={8}>
-            <img src={WhyChooseUsImage} className="w-c-us-image" />
-          </Grid>
+          <Grid item xs={9} sm={9} md={8} lg={8} xl={8}></Grid>
+          <img src={WhyChooseUsImage} className="w-c-us-image" alt="arrow" />
         </Grid>
       </div>
     </div>

@@ -17,19 +17,19 @@ const HowItWworks = () => {
           <div className="h-i-w-header">
             <div className="h-i-w-header-box">
               <div>
-                <img src={HowItWwrksImage1} />
+                <img src={HowItWwrksImage1} alt="first" />
               </div>
             </div>
             <div className="h-i-w-header-box-line" />
             <div className="h-i-w-header-box">
               <div>
-                <img src={HowItWwrksImage2} />
+                <img src={HowItWwrksImage2} alt="Second" />
               </div>
             </div>
             <div className="h-i-w-header-box-line" />
             <div className="h-i-w-header-box">
               <div>
-                <img src={HowItWwrksImage3} />
+                <img src={HowItWwrksImage3} alt="Third" />
               </div>
             </div>
           </div>
@@ -38,7 +38,7 @@ const HowItWworks = () => {
               <div className="h-i-w-header-res-box">
                 <div className="h-i-w-header-box">
                   <div>
-                    <img src={HowItWwrksImage1} />
+                    <img src={HowItWwrksImage1} alt="fourth" />
                   </div>
                 </div>
               </div>
@@ -54,7 +54,7 @@ const HowItWworks = () => {
               <div className="h-i-w-header-res-box">
                 <div className="h-i-w-header-box">
                   <div>
-                    <img src={HowItWwrksImage2} />
+                    <img src={HowItWwrksImage2} alt="second" />
                   </div>
                 </div>
               </div>
@@ -70,7 +70,7 @@ const HowItWworks = () => {
               <div className="h-i-w-header-res-box">
                 <div className="h-i-w-header-box">
                   <div>
-                    <img src={HowItWwrksImage3} />
+                    <img src={HowItWwrksImage3} alt="Third" />
                   </div>
                 </div>
               </div>

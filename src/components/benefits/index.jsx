@@ -12,12 +12,13 @@ const Benefits = () => {
             <Grid item xs={12} sm={12} md={5} lg={5} xl={5}>
               <p className="benefits-title">BENEFITS</p>
               <h1 className="benefits-heading">
-              Save time and Usage Limits with the best AI prompts on the Market
+                Save time and Usage Limits with the best AI prompts on the
+                Market
               </h1>
             </Grid>
             <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
               <div className="benefits-image-main">
-                <img src={BenefitsImage} />
+                <img src={BenefitsImage} alt="Benefits" />
               </div>
             </Grid>
           </Grid>

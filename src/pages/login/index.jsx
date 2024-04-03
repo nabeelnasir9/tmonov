@@ -43,7 +43,7 @@ const Login = () => {
       <div id="login-container-inner">
         <div className="login-section-1">
           <div className="form-contianer">
-            <img src={Logo} className="login-logo" />
+            <img src={Logo} className="login-logo" alt="logo" />
             <h1 className="login-heading">Login</h1>
             <div className="login-header" style={{ marginBottom: "50px" }}>
               <p>Do not have an account, </p>
@@ -74,7 +74,7 @@ const Login = () => {
           </div>
         </div>
         <div className="login-section-2">
-          <img src={SignInImage} />
+          <img src={SignInImage} alt="logo" />
         </div>
       </div>
     </div>

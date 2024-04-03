@@ -16,5 +16,5 @@ export {
   HowItWworks,
   Benefits,
   OrderSummary,
-  WhyChooseUs
+  WhyChooseUs,
 };

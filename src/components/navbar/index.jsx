@@ -26,7 +26,7 @@ const Navbar = ({ margin }) => {
         email
           .split(" ")
           .map((email) => email[0])
-          .join("")
+          .join(""),
       );
     }
   }, []);
@@ -75,7 +75,7 @@ const Navbar = ({ margin }) => {
               <div className="navbar-right-section">
                 {margin && (
                   <button onClick={() => navigate("/order-history")}>
-                    <img src={BegIcon} />
+                    <img src={BegIcon} alt="icon" />
                   </button>
                 )}
                 <button

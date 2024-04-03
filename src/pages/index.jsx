@@ -18,5 +18,5 @@ export {
   Shipping,
   Payment,
   ContactUs,
-  OrderHistory
+  OrderHistory,
 };

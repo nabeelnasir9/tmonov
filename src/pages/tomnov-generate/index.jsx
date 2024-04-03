@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import { Navbar, Button } from "../../components";
+import { Navbar } from "../../components";
 import Grid from "@mui/material/Grid";
+import axios from "axios";
 import "./index.css";
 import { FaCheck } from "react-icons/fa6";
 import GenerateIcon from "./../../assets/generate.svg";
@@ -9,6 +10,7 @@ const TomnovGenerate = () => {
   const navigate = useNavigate();
   const [selectedGender, setSelectedGender] = useState("Male");
   const GenderList = ["Male", "Female", "Other"];
+  const [progress, setProgress] = useState(false);
   const [Ethnicity, setEthnicity] = useState([
     {
       title: "Caucasians",
@@ -23,6 +25,47 @@ const TomnovGenerate = () => {
       selected: false,
     },
   ]);
+  console.log(Ethnicity);
+  const handleEthnicitySelection = (index) => {
+    const updatedEthnicity = Ethnicity.map((item, i) => {
+      if (i === index) {
+        return {
+          ...item,
+          selected: true,
+        };
+      } else {
+        return {
+          ...item,
+          selected: false,
+        };
+      }
+    });
+    setEthnicity(updatedEthnicity);
+  };
+  const [generatedImages, setGeneratedImages] = useState("");
+  const fetchData = async () => {
+    setProgress(true);
+    try {
+      const selectedEthnicities = Ethnicity.filter((item) => item.selected).map(
+        (item) => item.title,
+      );
+
+      const ethnicityString = selectedEthnicities.join(", ");
+      console.log(ethnicityString);
+      const response = await axios.post(
+        "http://localhost:3001/api/generate/create",
+        {
+          prompt: `Subject is a young ${ethnicityString} ${selectedGender} on island carrying abag on a stick and skipping carelessly.subjectis facing the camera. fullshot.photorealistic details.tarot card. --ar 1:2 --style raw`,
+        },
+      );
+      setGeneratedImages(response.data.uri);
+      // Assuming the response contains an array of image URIs
+      console.log("Generated images:", generatedImages);
+      setProgress(false);
+    } catch (error) {
+      console.error("Error fetching generated images:", error);
+    }
+  };
   const List = [
     "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
     "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
@@ -78,12 +121,7 @@ const TomnovGenerate = () => {
               <div className="tomnov-generate-checkbox-main">
                 {Ethnicity.map((v, i) => {
                   return (
-                    <div
-                      onClick={() => {
-                        Ethnicity[i].selected = !Ethnicity[i].selected;
-                        setEthnicity([...Ethnicity]);
-                      }}
-                    >
+                    <div key={i} onClick={() => handleEthnicitySelection(i)}>
                       <div>
                         {v.selected && <FaCheck color="#fff" size={13} />}
                       </div>
@@ -98,7 +136,13 @@ const TomnovGenerate = () => {
                 <img src={GenerateIcon} alt="icon" />
                 <p>Upload Target Image</p>
               </label>
-              <Button title="Generate Deck" />
+              <button
+                onClick={() => fetchData()}
+                disabled={progress}
+                className="big-button"
+              >
+                Genereate Deck
+              </button>
             </Grid>
             <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
               <div className="tomnov-generate-right-section">
@@ -118,29 +162,32 @@ const TomnovGenerate = () => {
                 </div>
                 <div className="tomnov-generate-image-container">
                   <Grid container spacing={3}>
-                    {List.map((v, i) => {
-                      return (
-                        <Grid item key={i} xs={4} sm={3} md={3} lg={3} xl={3}>
-                          <button
-                            className="tomnov-generate-image-mian"
-                            onClick={() =>
-                              navigate("/individual-card-review", {
-                                state: { index: i },
-                              })
-                            }
-                          >
-                            <img src={v} alt="icon" />
-                          </button>
-                        </Grid>
-                      );
-                    })}
+                    <img src={generatedImages} alt="check" />
                   </Grid>
+                  {/* <Grid container spacing={3}> */}
+                  {/*   {List.map((v, i) => { */}
+                  {/*     return ( */}
+                  {/*       <Grid item key={i} xs={4} sm={3} md={3} lg={3} xl={3}> */}
+                  {/*         <button */}
+                  {/*           className="tomnov-generate-image-mian" */}
+                  {/*           onClick={() => */}
+                  {/*             navigate("/individual-card-review", { */}
+                  {/*               state: { index: i }, */}
+                  {/*             }) */}
+                  {/*           } */}
+                  {/*         > */}
+                  {/*           <img src={v} alt="icon" /> */}
+                  {/*         </button> */}
+                  {/*       </Grid> */}
+                  {/*     ); */}
+                  {/*   })} */}
+                  {/* </Grid> */}
                 </div>
               </div>
             </Grid>
           </Grid>
         </Grid>
-        <Grid item xs={1} sm={1} md={1} lg={1} xl={1}></Grid>
+        {/* <Grid item xs={1} sm={1} md={1} lg={1} xl={1}></Grid> */}
       </Grid>
     </div>
   );

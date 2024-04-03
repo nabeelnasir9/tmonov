@@ -157,7 +157,7 @@
   font-size: 20px;
   font-weight: 500;
 }
-.tomnov-generate-button > div:hover{
+.tomnov-generate-button > div:hover {
   background-color: transparent;
 }
 .tomnov-generate-print-button {
@@ -179,15 +179,15 @@
 .tomnov-generate-right-section > img {
   width: 100%;
 }
-.tomnov-generate-image-mian{
+.tomnov-generate-image-mian {
   width: 100%;
   cursor: pointer;
 }
-.tomnov-generate-image-mian>img{
+.tomnov-generate-image-mian > img {
   width: 100%;
   height: 100%;
 }
-.tomnov-generate-image-container{
+.tomnov-generate-image-container {
   max-height: 70vh;
   overflow: auto;
 }
@@ -256,4 +256,25 @@
   .tomnov-generate-right-section-header > h1 {
     font-size: 16px;
   }
+}
+
+.big-button {
+  background-image: linear-gradient(to right, #7d3aeb, #9e2fb2);
+  height: 59px;
+  border-radius: 100px;
+  width: 100%;
+  text-align: center;
+  color: #fff;
+  font-family: "Exo 2";
+  font-size: 20px;
+  font-weight: 600;
+  margin-top: 30px;
+  cursor: pointer;
+}
+
+.big-button:disabled,
+.big-button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
 }

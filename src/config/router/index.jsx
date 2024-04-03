@@ -29,7 +29,7 @@ const RouterNavigation = () => {
           path="/individual-card-review"
           element={<IndividualCardReview />}
         />
-        {/* <Route path="/account" element={<Account />} /> */}
+        <Route path="/account" element={<Account />} />
         <Route path="/shipping" element={<Shipping />} />
         <Route path="/payment" element={<Payment />} />
         <Route path="/contact-us" element={<ContactUs />} />

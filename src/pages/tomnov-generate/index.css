@@ -274,7 +274,20 @@
 
 .big-button:disabled,
 .big-button[disabled] {
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
+  border: 1px solid #999999 !important;
+  background-color: #cccccc !important;
+  color: #666666 !important;
+}
+
+.progress-bar-main {
+  display: flex;
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+.progress-bar-heading {
+  color: white;
+  padding-left: 30px;
+  padding-top: 40px;
 }

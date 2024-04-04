@@ -1,17 +1,12 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useContext } from "react";
 import { Navbar } from "../../components";
 import Grid from "@mui/material/Grid";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./index.css";
 import { AuthContext } from "../../config/AuthContext";
 const IndividualCardReview = () => {
-  const { generatedImages2 } = useContext(AuthContext);
+  const { upscaleImage } = useContext(AuthContext);
   const navigate = useNavigate();
-  const location = useLocation();
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  useEffect(() => {
-    setSelectedIndex(location.state.index);
-  }, []);
   // const List = [
   //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
   //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
@@ -73,43 +68,9 @@ const IndividualCardReview = () => {
                   <h1>Individual Card Review</h1>
                 </div>
                 <div className="ind-card-rev-image-main">
-                  {generatedImages2 && (
-                    <img
-                      src={generatedImages2[selectedIndex].uri}
-                      alt="check"
-                    />
+                  {upscaleImage && upscaleImage.uri && (
+                    <img src={upscaleImage.uri} alt="check" />
                   )}
-                  {/* <img src={generatedImages2[selectedIndex].uri} alt="check" /> */}
-                  <div className="ind-card-rev-image-prev-button-main">
-                    <button
-                      className="ind-card-rev-image-prev-button"
-                      onClick={() => {
-                        if (selectedIndex === 0) {
-                          setSelectedIndex(generatedImages2.length - 1);
-                        } else {
-                          setSelectedIndex(selectedIndex - 1);
-                        }
-                        console.log("previous", selectedIndex);
-                      }}
-                    >
-                      <div>Previous</div>
-                    </button>
-                    <button
-                      className="ind-card-rev-image-next-button"
-                      onClick={() => {
-                        let index = selectedIndex;
-                        if (selectedIndex === generatedImages2.length - 1) {
-                          setSelectedIndex(0);
-                        } else {
-                          index++;
-                          setSelectedIndex(index);
-                        }
-                        console.log("next >>>>", selectedIndex);
-                      }}
-                    >
-                      Next
-                    </button>
-                  </div>
                 </div>
               </div>
             </Grid>

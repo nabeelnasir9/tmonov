@@ -8,9 +8,6 @@ import { AuthContext } from "../../config/AuthContext";
 import GenerateIcon from "./../../assets/generate.svg";
 import "./index.css";
 
-/**
- * @returns  [TODO: forward to upscale indiv card page]
- */
 const TomnovGenerate = () => {
   const { generatedImages2, setGeneratedImages2 } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -31,7 +28,6 @@ const TomnovGenerate = () => {
       selected: false,
     },
   ]);
-  console.log(Ethnicity);
   const handleEthnicitySelection = (index) => {
     const updatedEthnicity = Ethnicity.map((item, i) => {
       if (i === index) {
@@ -48,29 +44,6 @@ const TomnovGenerate = () => {
     });
     setEthnicity(updatedEthnicity);
   };
-  const [generatedImages, setGeneratedImages] = useState("");
-  const fetchData = async () => {
-    setProgress(true);
-    try {
-      const selectedEthnicities = Ethnicity.filter((item) => item.selected).map(
-        (item) => item.title,
-      );
-
-      const ethnicityString = selectedEthnicities.join(", ");
-      console.log(ethnicityString);
-      const response = await axios.post(
-        "http://localhost:3001/api/generate/create",
-        {
-          prompt: `https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs Subject is a young ${ethnicityString} ${selectedGender} on island carrying abag on a stick and skipping carelessly.subjectis facing the camera. fullshot.photorealistic details.tarot card. --ar 1:2 --style raw`,
-        },
-      );
-      setGeneratedImages(response.data.uri);
-      console.log("Generated images:", generatedImages);
-      setProgress(false);
-    } catch (error) {
-      console.error("Error fetching generated images:", error);
-    }
-  };
   const fetchData2 = async () => {
     setProgress(true);
     try {
@@ -79,7 +52,6 @@ const TomnovGenerate = () => {
       );
 
       const ethnicityString = selectedEthnicities.join(", ");
-      console.log(ethnicityString);
       const response = await axios.post(
         "http://localhost:3001/api/generate/create2",
         {
@@ -87,8 +59,6 @@ const TomnovGenerate = () => {
         },
       );
       setGeneratedImages2(response.data);
-      // Assuming the response contains an array of image URIs
-      console.log("Generated images:", generatedImages);
       setProgress(false);
     } catch (error) {
       console.error("Error fetching generated images:", error);
@@ -171,13 +141,6 @@ const TomnovGenerate = () => {
               >
                 Generate 2 Cards
               </button>
-              <button
-                onClick={() => fetchData()}
-                disabled={progress}
-                className="big-button"
-              >
-                Generate Single Card
-              </button>
             </Grid>
             <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
               <div className="tomnov-generate-right-section">
@@ -197,19 +160,22 @@ const TomnovGenerate = () => {
                 </div>
                 <div className="tomnov-generate-image-container">
                   <Grid container spacing={3}>
-                    <Grid item xs={4} sm={3} md={3} lg={3} xl={3}>
-                      <img src={generatedImages} alt="check" />
-                    </Grid>
-                  </Grid>
-                  <Grid container spacing={3}>
+                    {progress ? (
+                      <div className="progress-bar-main">
+                        <h1 className="progress-bar-heading">
+                          Generating please be patient...
+                        </h1>
+                      </div>
+                    ) : (
+                      <> </>
+                    )}
                     {generatedImages2?.map((v, i) => {
                       return (
                         <Grid item key={i} xs={4} sm={3} md={4} lg={4} xl={3}>
                           <button
                             className="tomnov-generate-image-mian"
                             onClick={() =>
-                              // FIX: Forward to /upscale and then to this.
-                              navigate("/individual-card-review", {
+                              navigate("/upscale", {
                                 state: { index: i },
                               })
                             }

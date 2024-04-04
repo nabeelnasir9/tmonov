@@ -4,8 +4,12 @@ export const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [generatedImages2, setGeneratedImages2] = useState([]);
   const [upscaleImage, setUpscaleImage] = useState("");
+  const [editImage, setEditImage] = useState("");
+
   const value = {
     upscaleImage,
+    editImage,
+    setEditImage,
     setUpscaleImage,
     generatedImages2,
     setGeneratedImages2,

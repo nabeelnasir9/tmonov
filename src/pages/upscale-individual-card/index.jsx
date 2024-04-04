@@ -11,6 +11,7 @@ const UpscaleCard = () => {
   const { generatedImages2, upscaleImage, setUpscaleImage } =
     useContext(AuthContext);
   const location = useLocation();
+  const [progress, setProgress] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   const selectedImage =
@@ -21,6 +22,7 @@ const UpscaleCard = () => {
       : "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W";
 
   const upscaleReq = async (type) => {
+    setProgress(true);
     try {
       const response = await axios.post(
         "http://localhost:3001/api/generate/upscale",
@@ -32,6 +34,7 @@ const UpscaleCard = () => {
 
       setUpscaleImage(response.data);
       console.log("Upscale image after update:", upscaleImage);
+      setProgress(false);
     } catch (error) {
       console.log(error);
     }
@@ -95,6 +98,7 @@ const UpscaleCard = () => {
               <div className="confirm-main">
                 <button
                   className="ind-card-rev-confirm-button"
+                  disabled={progress}
                   onClick={() => navigate("/individual-card-review")}
                 >
                   Confirm

@@ -1,12 +1,14 @@
-import React, { useState } from "react";
-import { Navbar } from "../../components";
 import Grid from "@mui/material/Grid";
 import axios from "axios";
-import "./index.css";
+import React, { useContext, useState } from "react";
 import { FaCheck } from "react-icons/fa6";
-import GenerateIcon from "./../../assets/generate.svg";
 import { useNavigate } from "react-router-dom";
+import { Navbar } from "../../components";
+import { AuthContext } from "../../config/AuthContext";
+import GenerateIcon from "./../../assets/generate.svg";
+import "./index.css";
 const TomnovGenerate = () => {
+  const { generatedImages2, setGeneratedImages2 } = useContext(AuthContext);
   const navigate = useNavigate();
   const [selectedGender, setSelectedGender] = useState("Male");
   const GenderList = ["Male", "Female", "Other"];
@@ -55,10 +57,32 @@ const TomnovGenerate = () => {
       const response = await axios.post(
         "http://localhost:3001/api/generate/create",
         {
-          prompt: `Subject is a young ${ethnicityString} ${selectedGender} on island carrying abag on a stick and skipping carelessly.subjectis facing the camera. fullshot.photorealistic details.tarot card. --ar 1:2 --style raw`,
+          prompt: `https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs Subject is a young ${ethnicityString} ${selectedGender} on island carrying abag on a stick and skipping carelessly.subjectis facing the camera. fullshot.photorealistic details.tarot card. --ar 1:2 --style raw`,
         },
       );
       setGeneratedImages(response.data.uri);
+      console.log("Generated images:", generatedImages);
+      setProgress(false);
+    } catch (error) {
+      console.error("Error fetching generated images:", error);
+    }
+  };
+  const fetchData2 = async () => {
+    setProgress(true);
+    try {
+      const selectedEthnicities = Ethnicity.filter((item) => item.selected).map(
+        (item) => item.title,
+      );
+
+      const ethnicityString = selectedEthnicities.join(", ");
+      console.log(ethnicityString);
+      const response = await axios.post(
+        "http://localhost:3001/api/generate/create2",
+        {
+          prompt: `https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs Subject is a young ${ethnicityString} ${selectedGender} on island carrying abag on a stick and skipping carelessly.subjectis facing the camera. fullshot.photorealistic details.tarot card. --ar 1:2 --style raw`,
+        },
+      );
+      setGeneratedImages2(response.data);
       // Assuming the response contains an array of image URIs
       console.log("Generated images:", generatedImages);
       setProgress(false);
@@ -66,30 +90,30 @@ const TomnovGenerate = () => {
       console.error("Error fetching generated images:", error);
     }
   };
-  const List = [
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtTLFqsQLGsAEmEZIhegjZ32TJuwlNrqxZdgJojzbvWuIV3dsQ",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWUPF-CBgAHVF7sfbXZdYwCcFs-S0j9nj652KBSraryD0JWPXh",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1ToGcEcOb6NP-d-eoZBihql_M2uwPr4RVStKe7INCczyxF0I5",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdx2JhuQbu40QmwjR46zt_KAMYaYaAHlszAVN4Q-5tHYkSuuCC",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRvxHnI6Xpij8C50DTGc_XH7cjFX0jQQHxX4WtUHMk2dDiOI8tN",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBOCqVHI_y5YPOyOTrd_0t1s_oKmHkHO33eC169R_4Uf2o5DPy",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkXnO5Jn4F3tvaVy1zncPOE83E89cHb-67x7n_0ME3NGMzq1A",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWNhpDAMH-Jh_6h4O5Sh8cCXcm2okaJqTej7MLL_3V0OVpJcwt",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSkQrh1qfAddIqjg7LAfSqhRTvE0JQhmqKZL1xb_wqHMa93fi_2",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSNurapI1turp3aN39WrgFqcr38S99Et88TRtbVwYpI7B97xtQf",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtTLFqsQLGsAEmEZIhegjZ32TJuwlNrqxZdgJojzbvWuIV3dsQ",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWUPF-CBgAHVF7sfbXZdYwCcFs-S0j9nj652KBSraryD0JWPXh",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1ToGcEcOb6NP-d-eoZBihql_M2uwPr4RVStKe7INCczyxF0I5",
-    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdx2JhuQbu40QmwjR46zt_KAMYaYaAHlszAVN4Q-5tHYkSuuCC",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRvxHnI6Xpij8C50DTGc_XH7cjFX0jQQHxX4WtUHMk2dDiOI8tN",
-    "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBOCqVHI_y5YPOyOTrd_0t1s_oKmHkHO33eC169R_4Uf2o5DPy",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkXnO5Jn4F3tvaVy1zncPOE83E89cHb-67x7n_0ME3NGMzq1A",
-    "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWNhpDAMH-Jh_6h4O5Sh8cCXcm2okaJqTej7MLL_3V0OVpJcwt",
-  ];
+  // const List = [
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtTLFqsQLGsAEmEZIhegjZ32TJuwlNrqxZdgJojzbvWuIV3dsQ",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWUPF-CBgAHVF7sfbXZdYwCcFs-S0j9nj652KBSraryD0JWPXh",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1ToGcEcOb6NP-d-eoZBihql_M2uwPr4RVStKe7INCczyxF0I5",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdx2JhuQbu40QmwjR46zt_KAMYaYaAHlszAVN4Q-5tHYkSuuCC",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRvxHnI6Xpij8C50DTGc_XH7cjFX0jQQHxX4WtUHMk2dDiOI8tN",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBOCqVHI_y5YPOyOTrd_0t1s_oKmHkHO33eC169R_4Uf2o5DPy",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkXnO5Jn4F3tvaVy1zncPOE83E89cHb-67x7n_0ME3NGMzq1A",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWNhpDAMH-Jh_6h4O5Sh8cCXcm2okaJqTej7MLL_3V0OVpJcwt",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSkQrh1qfAddIqjg7LAfSqhRTvE0JQhmqKZL1xb_wqHMa93fi_2",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSNurapI1turp3aN39WrgFqcr38S99Et88TRtbVwYpI7B97xtQf",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtTLFqsQLGsAEmEZIhegjZ32TJuwlNrqxZdgJojzbvWuIV3dsQ",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWUPF-CBgAHVF7sfbXZdYwCcFs-S0j9nj652KBSraryD0JWPXh",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1ToGcEcOb6NP-d-eoZBihql_M2uwPr4RVStKe7INCczyxF0I5",
+  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdx2JhuQbu40QmwjR46zt_KAMYaYaAHlszAVN4Q-5tHYkSuuCC",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRvxHnI6Xpij8C50DTGc_XH7cjFX0jQQHxX4WtUHMk2dDiOI8tN",
+  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBOCqVHI_y5YPOyOTrd_0t1s_oKmHkHO33eC169R_4Uf2o5DPy",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkXnO5Jn4F3tvaVy1zncPOE83E89cHb-67x7n_0ME3NGMzq1A",
+  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWNhpDAMH-Jh_6h4O5Sh8cCXcm2okaJqTej7MLL_3V0OVpJcwt",
+  // ];
   return (
     <div className="tomnov-generate-container">
       <Navbar margin={true} />
@@ -137,11 +161,18 @@ const TomnovGenerate = () => {
                 <p>Upload Target Image</p>
               </label>
               <button
+                onClick={() => fetchData2()}
+                disabled={progress}
+                className="big-button"
+              >
+                Generate 2 Cards
+              </button>
+              <button
                 onClick={() => fetchData()}
                 disabled={progress}
                 className="big-button"
               >
-                Genereate Deck
+                Generate Single Card
               </button>
             </Grid>
             <Grid item xs={12} sm={12} md={7} lg={7} xl={7}>
@@ -162,26 +193,28 @@ const TomnovGenerate = () => {
                 </div>
                 <div className="tomnov-generate-image-container">
                   <Grid container spacing={3}>
-                    <img src={generatedImages} alt="check" />
+                    <Grid item xs={4} sm={3} md={3} lg={3} xl={3}>
+                      <img src={generatedImages} alt="check" />
+                    </Grid>
                   </Grid>
-                  {/* <Grid container spacing={3}> */}
-                  {/*   {List.map((v, i) => { */}
-                  {/*     return ( */}
-                  {/*       <Grid item key={i} xs={4} sm={3} md={3} lg={3} xl={3}> */}
-                  {/*         <button */}
-                  {/*           className="tomnov-generate-image-mian" */}
-                  {/*           onClick={() => */}
-                  {/*             navigate("/individual-card-review", { */}
-                  {/*               state: { index: i }, */}
-                  {/*             }) */}
-                  {/*           } */}
-                  {/*         > */}
-                  {/*           <img src={v} alt="icon" /> */}
-                  {/*         </button> */}
-                  {/*       </Grid> */}
-                  {/*     ); */}
-                  {/*   })} */}
-                  {/* </Grid> */}
+                  <Grid container spacing={3}>
+                    {generatedImages2?.map((v, i) => {
+                      return (
+                        <Grid item key={i} xs={4} sm={3} md={4} lg={4} xl={3}>
+                          <button
+                            className="tomnov-generate-image-mian"
+                            onClick={() =>
+                              navigate("/individual-card-review", {
+                                state: { index: i },
+                              })
+                            }
+                          >
+                            <img src={v?.uri} alt="icon" />
+                          </button>
+                        </Grid>
+                      );
+                    })}
+                  </Grid>
                 </div>
               </div>
             </Grid>

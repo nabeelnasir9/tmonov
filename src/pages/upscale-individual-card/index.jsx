@@ -1,41 +1,18 @@
-import React, { useState, useEffect, useContext } from "react";
+import { Grid } from "@mui/material";
+import { useContext, useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Navbar } from "../../components";
-import Grid from "@mui/material/Grid";
-import { useNavigate, useLocation } from "react-router-dom";
-import "./index.css";
 import { AuthContext } from "../../config/AuthContext";
-const IndividualCardReview = () => {
-  const { generatedImages2 } = useContext(AuthContext);
+
+const UpscaleCard = () => {
   const navigate = useNavigate();
+  const { generatedImages2 } = useContext(AuthContext);
   const location = useLocation();
   const [selectedIndex, setSelectedIndex] = useState(0);
   useEffect(() => {
     setSelectedIndex(location.state.index);
   }, []);
-  // const List = [
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtTLFqsQLGsAEmEZIhegjZ32TJuwlNrqxZdgJojzbvWuIV3dsQ",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWUPF-CBgAHVF7sfbXZdYwCcFs-S0j9nj652KBSraryD0JWPXh",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1ToGcEcOb6NP-d-eoZBihql_M2uwPr4RVStKe7INCczyxF0I5",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdx2JhuQbu40QmwjR46zt_KAMYaYaAHlszAVN4Q-5tHYkSuuCC",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRvxHnI6Xpij8C50DTGc_XH7cjFX0jQQHxX4WtUHMk2dDiOI8tN",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBOCqVHI_y5YPOyOTrd_0t1s_oKmHkHO33eC169R_4Uf2o5DPy",
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkXnO5Jn4F3tvaVy1zncPOE83E89cHb-67x7n_0ME3NGMzq1A",
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWNhpDAMH-Jh_6h4O5Sh8cCXcm2okaJqTej7MLL_3V0OVpJcwt",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSkQrh1qfAddIqjg7LAfSqhRTvE0JQhmqKZL1xb_wqHMa93fi_2",
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSNurapI1turp3aN39WrgFqcr38S99Et88TRtbVwYpI7B97xtQf",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W",
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcT-U5UBUdG_DJh8e6iQotyxocNlAhYxMC34xoSQ2IazDWGTJNVs",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQtTLFqsQLGsAEmEZIhegjZ32TJuwlNrqxZdgJojzbvWuIV3dsQ",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRWUPF-CBgAHVF7sfbXZdYwCcFs-S0j9nj652KBSraryD0JWPXh",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQ1ToGcEcOb6NP-d-eoZBihql_M2uwPr4RVStKe7INCczyxF0I5",
-  //   "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQdx2JhuQbu40QmwjR46zt_KAMYaYaAHlszAVN4Q-5tHYkSuuCC",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcRvxHnI6Xpij8C50DTGc_XH7cjFX0jQQHxX4WtUHMk2dDiOI8tN",
-  //   "https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcSBOCqVHI_y5YPOyOTrd_0t1s_oKmHkHO33eC169R_4Uf2o5DPy",
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcTVkXnO5Jn4F3tvaVy1zncPOE83E89cHb-67x7n_0ME3NGMzq1A",
-  //   "https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcQWNhpDAMH-Jh_6h4O5Sh8cCXcm2okaJqTej7MLL_3V0OVpJcwt",
-  // ];
+
   return (
     <div className="tomnov-generate-container">
       <Navbar margin={true} />
@@ -73,19 +50,23 @@ const IndividualCardReview = () => {
                   <h1>Individual Card Review</h1>
                 </div>
                 <div className="ind-card-rev-image-main">
-                  {generatedImages2 && (
+                  {generatedImages2 ? (
                     <img
                       src={generatedImages2[selectedIndex].uri}
                       alt="check"
                     />
+                  ) : (
+                    <img
+                      src="https://encrypted-tbn3.gstatic.com/images?q=tbn:ANd9GcQSqC1w7juXyqLMMZ5zuUO5UqduW9xxfOfpANgUqLhfWFKj4D0W"
+                      alt="check"
+                    />
                   )}
-                  {/* <img src={generatedImages2[selectedIndex].uri} alt="check" /> */}
                   <div className="ind-card-rev-image-prev-button-main">
                     <button
                       className="ind-card-rev-image-prev-button"
                       onClick={() => {
                         if (selectedIndex === 0) {
-                          setSelectedIndex(generatedImages2.length - 1);
+                          setSelectedIndex(generatedImages2?.length - 1);
                         } else {
                           setSelectedIndex(selectedIndex - 1);
                         }
@@ -98,7 +79,7 @@ const IndividualCardReview = () => {
                       className="ind-card-rev-image-next-button"
                       onClick={() => {
                         let index = selectedIndex;
-                        if (selectedIndex === generatedImages2.length - 1) {
+                        if (selectedIndex === generatedImages2?.length - 1) {
                           setSelectedIndex(0);
                         } else {
                           index++;
@@ -120,4 +101,5 @@ const IndividualCardReview = () => {
     </div>
   );
 };
-export default IndividualCardReview;
+
+export default UpscaleCard;

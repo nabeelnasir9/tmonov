@@ -8,10 +8,12 @@ import Shipping from "./shipping";
 import Payment from "./payment";
 import ContactUs from "./contact-us";
 import OrderHistory from "./order-history";
+import UpscaleCard from "./upscale-individual-card";
 export {
   LandingPage,
   Login,
   SignUp,
+  UpscaleCard,
   TomnovGenerate,
   IndividualCardReview,
   Account,

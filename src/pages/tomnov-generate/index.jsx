@@ -7,6 +7,10 @@ import { Navbar } from "../../components";
 import { AuthContext } from "../../config/AuthContext";
 import GenerateIcon from "./../../assets/generate.svg";
 import "./index.css";
+
+/**
+ * @returns  [TODO: forward to upscale indiv card page]
+ */
 const TomnovGenerate = () => {
   const { generatedImages2, setGeneratedImages2 } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -204,6 +208,7 @@ const TomnovGenerate = () => {
                           <button
                             className="tomnov-generate-image-mian"
                             onClick={() =>
+                              // FIX: Forward to /upscale and then to this.
                               navigate("/individual-card-review", {
                                 state: { index: i },
                               })

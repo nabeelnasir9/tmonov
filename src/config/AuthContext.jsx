@@ -8,5 +8,6 @@ export const AuthProvider = ({ children }) => {
     setGeneratedImages2,
   };
 
+  console.log(generatedImages2, "generatedImages2");
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
